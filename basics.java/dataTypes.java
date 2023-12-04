@@ -1,91 +1,157 @@
-//Types
-/*The type system of a programming language describes how its data elements (the
-variables and constants we just touched on) are associated with storage in memory
-and how they are related to one another. In a statically typed language, such as C or C
-++, the type of a data element is a simple, unchanging attribute that often corre‐
-sponds directly to some underlying hardware phenomenon, such as a register or a
-pointer value. In a more dynamic language, such as Smalltalk or Lisp, variables can be
-assigned arbitrary elements and can effectively change their type throughout their
-lifetime. A considerable amount of overhead goes into validating what happens in
-these languages at runtime. Scripting languages, such as Perl, achieve ease of use by
-providing drastically simplified type systems in which only certain data elements can
-be stored in variables, and values are unified into a common representation, such as
-strings.
-
-Java combines many of the best features of both statically and dynamically typed lan‐
-guages. As in a statically typed language, every variable and programming element in
-Java has a type that is known at compile time, so the runtime system doesn’t normally
-have to check the validity of assignments between types while the code is executing.
-Unlike traditional C or C++, Java also maintains runtime information about objects
-and uses this to allow truly dynamic behavior. Java code may load new types at run‐
-time and use them in fully object-oriented ways, allowing casting and full polymor‐
-phism (extending of types). Java code may also “reflect” upon or examine its own
-types at runtime, allowing advanced kinds of application behavior such as inter‐
-preters that can interact with compiled programs dynamically.
-
-Java data types fall into two categories. Primitive types represent simple values that
-have built-in functionality in the language; they represent simple values such as num‐
-bers, booleans, and characters. Reference types (or class types) include objects and
-arrays; they are called reference types because they “refer to” a large data type that is
-passed “by reference,” as we’ll explain shortly. Generic types and methods define and
-operate on objects of various types while providing compile-time type safety. For
-example, a List<String> is a List that can only contain Strings. These are also ref‐
-erence types  */
+// Types
+/*
+ * The type system of a programming language describes how its data elements
+ * (the
+ * variables and constants we just touched on) are associated with storage in
+ * memory
+ * and how they are related to one another. In a statically typed language, such
+ * as C or C
+ * ++, the type of a data element is a simple, unchanging attribute that often
+ * corre‐
+ * sponds directly to some underlying hardware phenomenon, such as a register or
+ * a
+ * pointer value. In a more dynamic language, such as Smalltalk or Lisp,
+ * variables can be
+ * assigned arbitrary elements and can effectively change their type throughout
+ * their
+ * lifetime. A considerable amount of overhead goes into validating what happens
+ * in
+ * these languages at runtime. Scripting languages, such as Perl, achieve ease
+ * of use by
+ * providing drastically simplified type systems in which only certain data
+ * elements can
+ * be stored in variables, and values are unified into a common representation,
+ * such as
+ * strings.
+ * 
+ * Java combines many of the best features of both statically and dynamically
+ * typed lan‐
+ * guages. As in a statically typed language, every variable and programming
+ * element in
+ * Java has a type that is known at compile time, so the runtime system doesn’t
+ * normally
+ * have to check the validity of assignments between types while the code is
+ * executing.
+ * Unlike traditional C or C++, Java also maintains runtime information about
+ * objects
+ * and uses this to allow truly dynamic behavior. Java code may load new types
+ * at run‐
+ * time and use them in fully object-oriented ways, allowing casting and full
+ * polymor‐
+ * phism (extending of types). Java code may also “reflect” upon or examine its
+ * own
+ * types at runtime, allowing advanced kinds of application behavior such as
+ * inter‐
+ * preters that can interact with compiled programs dynamically.
+ * 
+ * Java data types fall into two categories. Primitive types represent simple
+ * values that
+ * have built-in functionality in the language; they represent simple values
+ * such as num‐
+ * bers, booleans, and characters. Reference types (or class types) include
+ * objects and
+ * arrays; they are called reference types because they “refer to” a large data
+ * type that is
+ * passed “by reference,” as we’ll explain shortly. Generic types and methods
+ * define and
+ * operate on objects of various types while providing compile-time type safety.
+ * For
+ * example, a List<String> is a List that can only contain Strings. These are
+ * also ref‐
+ * erence types
+ */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Primitive Types
+// Primitive Types
 
-/*Numbers, characters, and boolean values are fundamental elements in Java. Unlike
-some other (perhaps more pure) object-oriented languages, they are not objects. For
-those situations where it’s desirable to treat a primitive value as an object, Java pro‐
-vides “wrapper” classes. (More on this later.) The major advantage of treating primi‐
-tive values as special is that the Java compiler and runtime can more readily optimize
-their implementation. Primitive values and computations can still be mapped down
-to hardware as they always have been in lower-level languages. Indeed, if you work
-with native libraries using the Java Native Interface (JNI) to interact with other lan‐
-guages or services, these primitive types will figure prominently in your code.
+/*
+ * Numbers, characters, and boolean values are fundamental elements in Java.
+ * Unlike
+ * some other (perhaps more pure) object-oriented languages, they are not
+ * objects. For
+ * those situations where it’s desirable to treat a primitive value as an
+ * object, Java pro‐
+ * vides “wrapper” classes. (More on this later.) The major advantage of
+ * treating primi‐
+ * tive values as special is that the Java compiler and runtime can more readily
+ * optimize
+ * their implementation. Primitive values and computations can still be mapped
+ * down
+ * to hardware as they always have been in lower-level languages. Indeed, if you
+ * work
+ * with native libraries using the Java Native Interface (JNI) to interact with
+ * other lan‐
+ * guages or services, these primitive types will figure prominently in your
+ * code.
+ * 
+ * 
+ * An important portability feature of Java is that primitive types are
+ * precisely defined.
+ * For example, you never have to worry about the size of an int on a particular
+ * plat‐
+ * form; it’s always a 32-bit, signed, two’s complement number. The “size” of a
+ * numeric
+ * type determines how big (or how precise) a value you can store. For example,
+ * the
+ * byte type is for small numbers, from -128 to 127, while the int type can
+ * handle most
+ * numeric needs, storing values between (roughly) +/- two billion. Table 4-2
+ * summari‐
+ * zes Java’s primitive types.
+ */
 
+/*
+ * Table 4-2. Java primitive data types
+ * 
+ * Type Denition Approximate range or precision
+ * 
+ * boolean = Logical value = true or false
+ * char = 16-bit, Unicode character = 64K characters
+ * byte = 8-bit, signed, two’s complement integer = -128 to 127
+ * short = 16-bit, signed, two’s complement integer = -32,768 to 32,767
+ * int = 32-bit, signed, two’s complement integer= -2.1e9 to 2.1e9
+ * long 64-bit, signed, two’s complement integer= -9.2e18 to 9.2e18
+ * float = 32-bit, IEEE 754, floating-point value = 6-7 significant decimal
+ * places
+ * double = 64-bit, IEEE 754 = 15 significant decimal places
+ */
 
-An important portability feature of Java is that primitive types are precisely defined.
-For example, you never have to worry about the size of an int on a particular plat‐
-form; it’s always a 32-bit, signed, two’s complement number. The “size” of a numeric
-type determines how big (or how precise) a value you can store. For example, the
-byte type is for small numbers, from -128 to 127, while the int type can handle most
-numeric needs, storing values between (roughly) +/- two billion. Table 4-2 summari‐
-zes Java’s primitive types. */
-
-/*Table 4-2. Java primitive data types
-
-Type  Denition   Approximate range or precision
-
-boolean  = Logical value                         =     true or false
-char =   16-bit, Unicode character               =   64K characters
-byte =   8-bit, signed, two’s complement integer = -128 to 127
-short =  16-bit, signed, two’s complement integer = -32,768 to 32,767
-int =    32-bit, signed, two’s complement integer=  -2.1e9 to 2.1e9
-long    64-bit, signed, two’s complement integer=  -9.2e18 to 9.2e18
-float =  32-bit, IEEE 754, floating-point value = 6-7 significant decimal places
-double = 64-bit, IEEE 754 = 15 significant decimal places */
-
-/*If you do need bigger numbers than the primitive types offer, you can check out the
-BigInteger and BigDecimal classes in the java.Math package. These classes offer
-near-infinite size or precision. */
+/*
+ * If you do need bigger numbers than the primitive types offer, you can check
+ * out the
+ * BigInteger and BigDecimal classes in the java.Math package. These classes
+ * offer
+ * near-infinite size or precision.
+ */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///Floating-point precision
+/// Floating-point precision
 
-/*Floating-point operations in Java follow the IEEE 754 international specification,
-which means that the result of floating-point calculations is normally the same on dif‐
-ferent Java platforms. However, Java allows for extended precision on platforms that
-support it. This can introduce extremely small-valued and arcane differences in the
-results of high-precision operations. Most applications would never notice this, but if
-you want to ensure that your application produces exactly the same results on differ‐
-ent platforms, you can use the special keyword strictfp as a class modifier on the
-class containing the floating-point manipulation (we cover classes in the next chap‐
-ter). The compiler then prohibits these platform-specific optimizations. */
+/*
+ * Floating-point operations in Java follow the IEEE 754 international
+ * specification,
+ * which means that the result of floating-point calculations is normally the
+ * same on dif‐
+ * ferent Java platforms. However, Java allows for extended precision on
+ * platforms that
+ * support it. This can introduce extremely small-valued and arcane differences
+ * in the
+ * results of high-precision operations. Most applications would never notice
+ * this, but if
+ * you want to ensure that your application produces exactly the same results on
+ * differ‐
+ * ent platforms, you can use the special keyword strictfp as a class modifier
+ * on the
+ * class containing the floating-point manipulation (we cover classes in the
+ * next chap‐
+ * ter). The compiler then prohibits these platform-specific optimizations.
+ */
 
-//Variable declaration and initialization
-/*Variables are declared inside of methods and classes with a type name followed by
-one or more comma-separated variable names. For example: */
+// Variable declaration and initialization
+/*
+ * Variables are declared inside of methods and classes with a type name
+ * followed by
+ * one or more comma-separated variable names. For example:
+ */
 public class dataTypes {
 
     static void main() {
@@ -94,7 +160,8 @@ public class dataTypes {
         boolean isFun;
 
         /*
-         * Variables can optionally be initialized with an expression of the appropriate
+         * Variables can optionally be initialized with an expression of the
+         * appropriate
          * type
          * when they are declared
          */
@@ -109,13 +176,16 @@ public class dataTypes {
          * appropriate fla‐
          * vor of zero, characters are set to the null character (\0), and boolean
          * variables have
-         * the value false. (Reference types also get a default value, null, but more on
+         * the value false. (Reference types also get a default value, null, but more
+         * on
          * that soon
-         * in “Reference Types” on page 95.) Local variables, which are declared inside
+         * in “Reference Types” on page 95.) Local variables, which are declared
+         * inside
          * a method
          * and live only for the duration of a method call, on the other hand, must be
          * explicitly
-         * initialized before they can be used. As we’ll see, the compiler enforces this
+         * initialized before they can be used. As we’ll see, the compiler enforces
+         * this
          * rule so
          * there is no danger of forgetting
          */
@@ -124,14 +194,17 @@ public class dataTypes {
         // Integer literals
 
         /*
-         * Integer literals can be specified in binary (base 2), octal (base 8), decimal
-         * (base 10), or hexadecimal (base 16). Binary, octal, and hexadecimal bases are
+         * Integer literals can be specified in binary (base 2), octal (base 8),
+         * decimal
+         * (base 10), or hexadecimal (base 16). Binary, octal, and hexadecimal bases
+         * are
          * mostly used
          * when dealing with low-level file or network data. They represent useful
          * groupings
          * of individual bits: 1, 3, and 4 bits, respectively. Decimal values have no
          * such
-         * mapping, but they are much more human-friendly for most numeric information.
+         * mapping, but they are much more human-friendly for most numeric
+         * information.
          * A decimal
          * integer is specified by a sequence of digits beginning with one of the
          * characters 1–9:
@@ -159,7 +232,8 @@ public class dataTypes {
         int i = 0xFFFF; // i = 65535 decimal
 
         /*
-         * Integer literals are of type int unless they are suffixed with an L, denoting
+         * Integer literals are of type int unless they are suffixed with an L,
+         * denoting
          * that they
          * are to be produced as a long value:
          */
@@ -203,7 +277,8 @@ public class dataTypes {
          * Conversions from floating-point to integer types always require an explicit
          * cast
          * because of the potential loss of precision.
-         * Finally, we should note that if you are using Java 7 or later, you can add a
+         * Finally, we should note that if you are using Java 7 or later, you can add
+         * a
          * bit of for‐
          * matting to your numeric literals by utilizing the “_” underscore character
          * between
@@ -215,6 +290,35 @@ public class dataTypes {
         int for_no_reason = 1___2___3;
         int JAVA_ID = 0xCAFE_BABE;
         long grandTotal = 40_123_456_789L;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /*Floating-point literals
+
+
+Floating-point values can be specified in decimal or scientific notation. Floating-point
+literals are of type double unless they are suffixed with an f or F denoting that they
+are to be produced as a float value. And just as with integer literals, in Java 7 you
+may use “_” underscore characters to format floating-point numbers—but only
+between digits, not at the beginning, end, or next to the decimal point or “F” signifier
+of the number. */
+
+double d = 8.31;
+ double e = 3.00e+8;
+ float f = 8.31F;
+ float g = 3.00e+8F;
+ float pi = 3.14_159_265_358;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*Character literals
+
+A literal character value can be specified either as a single-quoted character or as an
+escaped ASCII or Unicode sequence: */
+
+char a = 'a';
+ char newline = '\n';
+ char smiley = '\u263a';
 
     }
 }
