@@ -26,4 +26,39 @@ more complicated or even implementation dependent. Java removes this element of
 danger by precisely and simply defining how the code is evaluated. This doesn’t mean
 you should start writing obscure and convoluted statements, however. Relying on the
 order of evaluation of expressions in complex ways is a bad programming habit, even
-when it works. It produces code that is hard to read and harder to modify.
+when it works. It produces code that is hard to read and harder to modify. */
+
+
+/*if/else conditionals 
+ * 
+
+ One of the key concepts in programming is the notion of making a decision. “If this
+file exists…” or “If the user has a WiFi connection…” are examples of the decisions
+computer programs and apps make all the time. We can define an if/else clause as
+follows:
+
+if ( condition )
+ statement;
+ else
+ statement;
+
+ The whole of the preceding example is itself a statement and could be nested within
+another if/else clause. The if clause has the common functionality of taking two
+different forms: a “one-liner” or a block. The block form is as follows:
+
+
+ if ( condition ) {
+ [ statement; ]
+ [ statement; ]
+ [ ... ]
+ } else {
+ [ statement; ]
+ [ statement; ]
+ [ ... ]
+ } 
+
+
+
+
+ 
+*/
