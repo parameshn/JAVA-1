@@ -122,3 +122,87 @@ new Button("Backwards")};
  //The following are equivalent:
  Button [] threeButtons = new Button [3];
  Button [] threeButtons = { null, null, null };
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ //Using Arrays
+
+//The size of an array object is available in the public variable length:
+
+char [] alphabet = new char[26];
+int alphalen = alphabet.length;  // alphaLen == 26
+
+
+Stirng [] musketeers = {"one","two","three"};
+int num = musketeers.length; //num == 3
+
+
+//length is the only accessible field of an array; it is a variable, not a method.
+
+/*Array access in Java is just like array access in other languages; you access an element
+by putting an integer-valued expression between brackets after the name of the array.
+The following example creates an array of Button objects called keyPad and then fills
+the array with Button objects */
+Button [] keyPad = new Button [ 10 ];
+ for ( int i=0; i < keyPad.length; i++ )
+ keyPad[ i ] = new Button( Integer.toString( i ) );
+
+
+ /*Remember that we can also use the enhanced for loop to iterate over array values.
+Here we’ll use it to print all the values we just assigned: */
+
+for (Button b : keyPad)
+ System.out.println(b);
+
+
+ /*Attempting to access an element that is outside the range of the array generates an
+ArrayIndexOutOfBoundsException. This is a type of RuntimeException, so you can
+either catch and handle it yourself if you really expect it, or ignore it, as we will
+ */
+
+ /*Here’ a taste of the try/catch syntax Java uses to wrap such
+potentially problematic code: */
+String [] states = new String [50];
+ try {
+ states[0] = "California";
+ states[1] = "Oregon";
+ ...
+ states[50] = "McDonald's Land"; // Error: array out of bounds
+ }
+ catch ( ArrayIndexOutOfBoundsException err ) {
+ System.out.println( "Handled error: " + err.getMessage() );
+ }
+/*It’s a common task to copy a range of elements from one array into another. One way
+to copy arrays is to use the low-level arraycopy() method of the System class:
+ */
+System.arraycopy( source, sourceStart, destination, destStart, length );
+
+//The following example doubles the size of the names array from an earlier example:
+String [] tmpVar = new String [ 2 * names.length ];
+ System.arraycopy( names, 0, tmpVar, 0, names.length );
+ names = tmpVar;
+/*A new array, twice the size of names, is allocated and assigned to a temporary variable,
+tmpVar. The arraycopy() method is then used to copy the elements of names to the
+new array. Finally, the new array is assigned to names. If there are no remaining refer‐
+ences to the old array object after names has been copied, it is garbage-collected on
+the next pass. */
+
+//An easier way is to use the java.util.ArrayscopyOf() and copyOfRange() methods:
+byte [] bar = new byte[] { 1, 2, 3, 4, 5 };
+ byte [] barCopy = Arrays.copyOf( bar, bar.length );
+ // { 1, 2, 3, 4, 5 }
+ byte [] expanded = Arrays.copyOf( bar, bar.length+2 );
+ // { 1, 2, 3, 4, 5, 0, 0 }
+ byte [] firstThree = Arrays.copyOfRange( bar, 0, 3 );
+ // { 1, 2, 3 }
+ byte [] lastThree = Arrays.copyOfRange( bar, 2, bar.length );
+ // { 3, 4, 5 }
+ byte [] lastThreePlusTwo = Arrays.copyOfRange( bar, 2, bar.length+2 );
+ // { 3, 4, 5, 0, 0 }
+
+ /*The copyOf() method takes the original array and a target length. If the target length
+is larger than the original array length, then the new array is padded (with zeros or
+nulls) to the desired length. The copyOfRange() takes a starting index (inclusive) and
+an ending index (exclusive) and a desired length, which will also be padded if
+necessary.
+ */
