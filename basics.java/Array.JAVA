@@ -206,3 +206,33 @@ nulls) to the desired length. The copyOfRange() takes a starting index (inclusiv
 an ending index (exclusive) and a desired length, which will also be padded if
 necessary.
  */
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Anonymous Arrays
+
+/*Often it is convenient to create “throwaway” arrays, arrays that are used in one place
+and never referenced anywhere else. Such arrays don’t need a name because you
+never need to refer to them again in that context. For example, you may want to cre‐
+ate a collection of objects to pass as an argument to some method. It’s easy enough to
+create a normal, named array, but if you don’t actually work with the array (if you use
+the array only as a holder for some collection), you shouldn’t need to do this. Java
+makes it easy to create “anonymous” (i.e., unnamed) arrays.
+Let’s say you need to call a method named setPets(), which takes an array of Animal
+objects as arguments. Provided Cat and Dog are subclasses of Animal, here’s how to
+call setPets() using an anonymous array: */
+Dog pokey = new Dog ("gray");
+ Cat boojum = new Cat ("grey");
+ Cat simon = new Cat ("orange");
+ setPets ( new Animal [] { pokey, boojum, simon });
+/*The syntax looks similar to the initialization of an array in a variable declaration. We
+implicitly define the size of the array and fill in its elements using the curly-brace
+notation. However, because this is not a variable declaration, we have to explicitly use
+the new operator and the array type to create the array object.
+Anonymous arrays were sometimes used as a substitute for variable-length argument
+lists to methods. Perhaps familiar to C programmers, a variable-length argument list
+allows you to send an arbitrary amount of data to a method. An example might be a
+method that calculates an average of a batch of numbers. You could put all the num‐
+bers into one array, or you could allow your method to accept one or two or three or
+many numbers as arguments. With the introduction of variable-length argument lists
+in Java,6
+, the usefulness of anonymous arrays has diminished. */
