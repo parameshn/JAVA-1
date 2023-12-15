@@ -236,3 +236,96 @@ bers into one array, or you could allow your method to accept one or two or thre
 many numbers as arguments. With the introduction of variable-length argument lists
 in Java,6
 , the usefulness of anonymous arrays has diminished. */
+
+
+//Multidimensional Arrays
+
+/*Java supports multidimensional arrays in the form of arrays of array type objects. You
+create a multidimensional array with C-like syntax, using multiple bracket pairs, one
+for each dimension. You also use this syntax to access elements at various positions
+within the array. Here’s an example of a multidimensional array that represents a
+chessboard: */
+
+
+chessPiece [][] chessBoard;
+chessBoard = new chessPiece [8][8];
+chessBoard[0] = new chessPiece.Rook;
+chessBoard[1][0] = new chessPiece.Pawn;
+
+/*Here, chessBoard is declared as a variable of type ChessPiece[][] (i.e., an array of
+ChessPiece arrays). This declaration implicitly creates the type ChessPiece[] as well.
+The example illustrates the special form of the new operator used to create a multidi‐
+mensional array. It creates an array of ChessPiece[] objects and then, in turn, makes
+each element into an array of ChessPiece objects. We then index chessBoard to spec‐
+ify values for particular ChessPiece elements. (We’ll neglect the color of the pieces
+here.)
+
+
+Of course, you can create arrays with more than two dimensions. Here’s a slightly
+impractical example: */
+
+color [][][] rgbCube = new color [256][256][256];
+rgbCube[0][0][0] = color.black;
+rgbCube[255][255][0];
+/*We can specify a partial index of a multidimensional array to get a subarray of array
+type objects with fewer dimensions. In our example, the variable chessBoard is of
+type ChessPiece[][]. The expression chessBoard[0] is valid and refers to the first
+element of chessBoard, which, in Java, is of type ChessPiece[]. For example, we can
+populate our chessboard one row at a time: */
+
+chessPiece[] homeRow = {
+    new ChessPiece("Rook"), new ChessPiece("Knight"),
+ new ChessPiece("Bishop"), new ChessPiece("King"),
+ new ChessPiece("Queen"), new ChessPiece("Bishop"),
+ new ChessPiece("Knight"), new ChessPiece("Rook")
+ };
+
+ chessBoard[0] = homeRow;
+
+/*We don’t necessarily have to specify the dimension sizes of a multidimensional array
+with a single new operation. The syntax of the new operator lets us leave the sizes of
+some dimensions unspecified. The size of at least the first dimension (the most signif‐
+icant dimension of the array) has to be specified, but the sizes of any number of trail‐
+ing, less significant array dimensions may be left undefined. We can assign
+appropriate array-type values later. 
+
+
+We can create a checkerboard of boolean values (which is not quite sufficient for a
+real game of checkers either) using this technique:*/
+
+boolean [][] checkerboard;
+checkerboard = new boolean[8][];
+
+/*Here, checkerBoard is declared and created, but its elements, the eight boolean[]
+objects of the next level, are left empty. Thus, for example, checkerBoard[0] is null
+until we explicitly create an array and assign it, as follows: */
+
+checkerBoard[0] = new boolean [8];
+checkerBoard[1] = new boolean [8];
+checkerBoard[2] = new boolean [8];
+
+checkerBoard[7] = new boolean [8];
+/*These lines initialize the inner arrays at indices 0 and 1 with new boolean arrays of size 8. Now, the checkerBoard is a 2D array with 8 rows and each row contains an array of 8 booleans. */
+
+//The code of the previous two examples is equivalent to:
+boolean [][] checkerBoard = new boolean [8][8];
+
+/*One reason we might want to leave dimensions of an array unspecified is so that we
+can store arrays given to us by another method.
+Note that because the length of the array is not part of its type, the arrays in the
+checkerboard do not necessarily have to be of the same length; that is, multidimen‐
+sional arrays don’t have to be rectangular. Here’s a defective (but perfectly legal in
+Java) checkerboard: */
+
+checkerBoard[2] = new boolean [3];
+ checkerBoard[3] = new boolean [10];
+//And here’s how you could create and initialize a triangular array:
+
+int [] []triangle = new int[5][];
+for (int i =0 ;i < triangle.length;i++){
+    triangle[i] = new int [i +1];
+    for (int j = 0;j <i+1;j++){
+        triangle[i][j] = i+j;
+    
+    }
+}
