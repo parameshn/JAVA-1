@@ -1,3 +1,24 @@
+/*A local variable is temporary; it exists only within the scope (the
+block) of its method. Local variables are allocated when a method is invoked; they are
+normally destroyed when the method returns.
+
+They can’t be referenced from outside
+the method itself. If the method is executing concurrently in different threads, each
+thread has its own version of the method’s local variables.
+
+A method’s arguments also
+serve as local variables within the scope of the method; the only difference is that they
+are initialized by being passed in from the caller of the method.
+
+An object created within a method and assigned to a local variable may or may not
+persist after the method has returned.
+*/
+
+
+
+
+
+
 //Initializing Local Variables
 /*Unlike instance variables that receive default values if we don’t provide an explicit
 one, local variables must be initialized before they can be used. It’s a compile-time
