@@ -55,3 +55,99 @@ ables live effectively forever. */
 with the visibility modifiers public, private, or protected, just like other methods,
 to control their accessibility. We’ll talk in detail about visibility modifiers in the next
 chapter */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Working with Overloaded Constructors
+
+/*A constructor can refer to another constructor in the same class or the immediate
+superclass using special forms of the this and super references.  */
+
+/* A constructor can invoke another overloaded con‐
+structor in its class using the self-referential method call this() with appropriate
+arguments to select the desired constructor. If a constructor calls another constructor,
+it must do so as its first statement: */
+
+class Car {
+    String model;
+    int doors;
+    Car( String model, int doors ) {
+    this.model = model;
+    this.doors = doors;
+    // other, complicated setup
+    
+    }
+    Car( String model ) {
+    this( model, 4 /* doors */ );
+    }
+    
+    }
+
+
+ /*In this example, the class Car has two constructors. 
+
+ The first, more explicit, one
+accepts arguments specifying the car’s model and its number of doors. 
+
+The second
+constructor takes just the model as an argument and, in turn, calls the first construc‐
+tor with a default value of four doors 
+
+The advantage of this approach is that you can have a single constructor do all the complicated setup work; other auxiliary construc‐
+tors simply feed the appropriate arguments to that constructor.
+*/
+
+
+/*The special call to this() must appear as the first statement in our delegating con‐
+structor. The syntax is restricted in this way because there’s a need to identify a clear
+chain of command in the calling of constructors. At the end of the chain, Java invokes
+the constructor of the superclass (if we don’t do it explicitly) to ensure that inherited
+members are initialized properly before we proceed. */
+
+/*There’s also a point in the chain, just after invoking the constructor of the superclass,
+where the initializers of the current class’s instance variables are evaluated. Before that
+point, we can’t even reference the instance variables of our class */
+
+/*For now, all you need to know is that you can invoke a second constructor (delegate
+to it) only as the first statement of your constructor. For example, the following code
+is illegal and causes a compile-time error: */
+
+Car( String m ) {
+    int doors = determineDoors();
+    this( m, doors ); // Error: constructor call
+    // must be first statement
+    }
+
+    /*The simple model name constructor can’t do any additional setup before calling the
+more explicit constructor. It can’t even refer to an instance member for a constant
+value: */
+
+class Car {
+    ...
+    final int default_doors = 4;
+    ...
+    Car( String m ) {
+    this( m, default_doors ); // Error: referencing
+    // uninitialized variable
+    }
+    ...
+    }
+
+    /*The instance variable defaultDoors is not initialized until a later point in the chain of
+constructor calls setting up the object, so the compiler doesn’t let us access it yet. For‐
+tunately, we can solve this particular problem by using a static variable instead of an
+instance variable:
+ */
+
+ class Car {
+    ...
+    static final int DEFAULT_DOORS = 4;
+    ...
+    Car( String m ) {
+        this( m, DEFAULT_DOORS ); // Okay!
+ }
+ ...
+}
+
+//The static members of a class are initialized when the class is first loaded into the virtual machine, so it’s safe to access them in a constructor.
