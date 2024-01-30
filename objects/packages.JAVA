@@ -102,3 +102,59 @@ classes with an already lengthy list of imports, one-off usages can actually mak
 code more readable. Such a fully qualified entry often points to the sole use of this
 class within a file. If you were using it many times, you would import it. This type of
 usage is never a requirement, but you will see it in the wild from time to time. */
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Custom Packages
+/*As you continue learning Java and write more code and solve larger problems, you
+will undoubtedly start to collect a larger and larger number of classes. You can use
+packages yourself to help organize that collection. You use the package keyword to
+declare a custom package. As noted at the top of this section, you then place the file
+with your class inside a folder structure corresponding to the package name. As a
+quick reminder, packages use all lowercase names (by convention) separated by peri‐
+ods, such as in our graphical interface package, javax.swing */
+
+/*Another convention applied widely to package names is something called “reverse
+domain name” naming. Apart from the packages associated directly with Java, thirdparty libraries and other contributed code is usually organized using the domain
+name of the company or individual’s email address. For example, the Mozilla Founda‐
+tion has contributed a variety of Java libraries to the open source community. Most of
+those libraries and utilities will be in packages starting with Mozilla’s domain,
+mozilla.org, in reverse order: org.mozilla. This reverse naming has the handy (and
+intended) side effect of keeping the folder structure at the top fairly small. It is not
+uncommon to have good-sized projects that use libraries from only the com and org
+top-level domains. */
+
+/*If you are building your own packages separate from any company or contract work,
+you can use your email address and reverse it, similar to company domain names.
+Another popular option for code distributed online is to use the domain of your
+hosting provider. GitHub, for example, hosts many, many Java projects for hobbyists
+and enthusiasts. You might create a package named com.github.myawesomeproject
+where “myawesomeproject” would obviously be replaced by your actual project
+name. Be aware that repositories at sites like GitHub often allow names that are not
+valid in package names. You might have a project named my-awesome-project, but
+dashes are not allowed in any portion of a package name. Often such illegal charac‐
+ters are simply omitted to create a valid name. */
+
+/*You may have already taken a peek at more of the examples in the code archive for
+this book. If so, you will have noticed we placed them in packages. While the organiz‐
+ing of classes within packages is a woolly topic with no great best practices available,
+we’ve taken an approach designed to make the examples easy to locate as you’re read‐
+ing the book. For small examples in a chapter, you’ll see a package like ch05. For the
+ongoing game example, we use game. We could rewrite our very first examples to fit
+into this scheme quite easily: */
+
+package ch02;
+ import javax.swing.*;
+ public class HelloJava {
+ public static void main( String[] args ) {
+ JFrame frame = new JFrame("Hello, Java!");
+ JLabel label = new JLabel("Hello, Java!", JLabel.CENTER );
+ }
+}
+/*We would need to create the folder structure ch02 and then place our HelloJava.java
+file in that ch02 folder. We could then compile and run the example at the command
+line by staying at the top of the folder hierarchy and using the fully qualified path of
+the file and name of the class, like so */
+
+//%javac ch02/HelloJava.java
+ //%java ch02.HelloJava
