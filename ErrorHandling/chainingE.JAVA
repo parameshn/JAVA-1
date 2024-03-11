@@ -49,3 +49,38 @@ try {
  log( cause ); // Log it
  throw cause; // rethrow it
  }
+
+
+
+ /*Narrowed rethrow
+
+
+Prior to Java 7, if you wanted to handle a bunch of exception types in a single catch
+clause and then rethrow the original exception, you would inevitably end up widen‐
+ing the declared exception type to what was required to catch them all or having to do
+a lot of work to avoid that. In Java 7, the compiler has become smarter and can now
+do most of the work for us by allowing us to narrow the type of exceptions thrown
+back to the original types in most cases. This is best explained by example:
+ */
+
+ void myMethod() throws ZipException, SSLException
+ {
+ try {
+ // Possible cause of ZipException or SSLException
+ } catch ( Exception e ) {
+ log( e );
+ throw e;
+ }
+ }
+
+
+ /*In this example, we are exceedingly lazy and simply catch all exceptions with a broad
+catch Exception clause in order to log them prior to rethrowing. Prior to Java 7, the
+compiler would have insisted that the throws clause of our method declare that it
+throws the broad Exception type as well. However, the Java compiler is now smart
+enough in most cases to analyze the actual types of exceptions that may be thrown
+and allow us to prescribe the precise set of types. The same would be true if we had
+used the mutiple-type catch clause in this example, as you might have guessed. The
+preceding is a bit less intuitive, but very useful in shoring up the specificity of
+exception handling of code, including code written prior to Java 7, without requiring
+potentially tricky reworking of catch clauses. */
