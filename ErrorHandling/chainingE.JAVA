@@ -84,3 +84,54 @@ used the mutiple-type catch clause in this example, as you might have guessed. T
 preceding is a bit less intuitive, but very useful in shoring up the specificity of
 exception handling of code, including code written prior to Java 7, without requiring
 potentially tricky reworking of catch clauses. */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//try Creep
+
+/*The try statement imposes a condition on the statements that it guards. It says that if
+an exception occurs within it, the remaining statements are abandoned. This has con‐
+sequences for local variable initialization. If the compiler can’t determine whether a
+local variable assignment placed inside a try/catch block will happen, it won’t let us
+use the variable. For example: */
+
+void myMethod() {
+ int foo;
+ try {
+ foo = getResults();
+ }
+ catch ( Exception e ) {
+ ...
+ }
+ int bar = foo; // Compile-time error: foo may not have been initialized
+
+ /*In this example, we can’t use foo in the indicated place because there’s a chance it was
+never assigned a value. One obvious option is to move the assignment inside the try
+statement: */
+
+try {
+    foo = getResults();
+    int bar = foo; // Okay because we get here only
+    // if previous assignment succeeds
+    }
+    catch ( Exception e ) {
+    ...
+    }
+    /*Sometimes this works just fine. However, now we have the same problem if we want
+to use bar later in myMethod(). If we’re not careful, we might end up pulling every‐
+thing into the try statement. The situation changes, however, if we transfer control
+out of the method in the catch clause: */
+
+try {
+    foo = getResults();
+    }
+    catch ( Exception e ) {
+    ...
+    return;
+    }
+    int bar = foo; // Okay because we get here only
+ // if previous assignment succeeds
+}
+ /*The compiler is smart enough to know that if an error had occurred in the try clause,
+we wouldn’t have reached the bar assignment, so it allows us to refer to foo. Your
+code will dictate its own needs; you should just be aware of the options */
