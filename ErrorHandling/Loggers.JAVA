@@ -202,3 +202,103 @@ Notice that the lower-level messages did not appear. This is because the default
 ging level is normally set to INFO, meaning that only messages of severity INFO and
 above are logged. Also note that the output went to the system console and not to a
 logfile somewhere; that’s also the default. */
+
+
+//Logging Setup Properties
+
+/*As we said in the introduction, probably the most important feature of the Logging
+API is the ability to configure so much of it at runtime through the use of external
+properties or applications. The default logging configuration is stored in the file
+jre/lib/logging.properties in the directory where Java is installed. It’s a standard Java
+properties file (of the kind we described earlier in this chapter).
+The format of this file is simple. You can make changes to it, but you don’t have to.
+Instead, you can specify your own logging setup properties file on a case-by-case
+basis using a system property at runtime, as follows: */
+% java -Djava.util.logging.config.file=myfile.properties
+/*
+In this command line, myfile is your properties file that contains the directive, which
+we’ll describe next. If you want to make this file designation more permanent, you
+can do so by setting the filename in the corresponding entry using the Java Preferen‐
+ces API. You can go even further and instead of specifying a setup file, supply a class
+that is responsible for setting up all logging configuration, but we won’t get into that
+here.
+A very simple logging properties file might look like this: */
+
+# Set the default logging level
+ .level = FINEST
+ # Direct output to the console
+ handlers = java.util.logging.ConsoleHandler
+
+ /*Here, we have set the default logging level for the entire application using the .level
+(that’s dot-level) property. We have also used the handlers property to specify that an
+instance of the ConsoleHandler should be used (just like the default setup) to show
+messages on the console */
+
+# Set the default logging level
+ .level = INFO
+ # Ouput to file and console
+ handlers = java.util.logging.FileHandler, java.util.logging.ConsoleHandler
+ # Configure the file output
+ java.util.logging.FileHandler.level = FINEST
+ java.util.logging.FileHandler.pattern = %h/Test.log
+ java.util.logging.FileHandler.limit = 25000
+ java.util.logging.FileHandler.count = 4
+ java.util.logging.FileHandler.formatter = java.util.logging.XMLFormatter
+ # Configure the console output
+ java.util.logging.ConsoleHandler.level = WARNING
+ # Levels for specific classes
+ com.oreilly.LogTest.level = FINEST
+
+ /*In this example, we have configured two log handlers: a ConsoleHandler with the
+logging level set to WARNING and also an instance of FileHandler that sends the out‐
+put to an XML file. The file handler is configured to log messages at the FINEST level
+(all messages) and to rotate logfiles every 25,000 lines, keeping a maximum of 4 files.
+The filename is controlled by the pattern property. Forward slashes in the filename
+are automatically localized to backslash (\) if necessary. The special symbol %h refers
+to the user home. You can use %t to refer to the system temporary directory. If file‐
+names conflict, a number is appended automatically after a dot (starting at zero).
+Alternatively, you can use %u to indicate where a unique number should be inserted
+into the name. Similarly, when files rotate, a number is appended after a dot at the
+end. You can take control of where the rotation number is placed with the %g
+identifier.
+In our example, we specified the XMLFormatter class. We could also have used the
+SimpleFormatter class to send the same kind of simple output to the console. The
+ConsoleHandler also allows us to specify any formatter we wish, using the formatter
+property.
+Finally, we promised earlier that you could control logging levels for parts of your
+applications. To do this, set properties on your application loggers using their hier‐
+archical names: */
+# Levels for specific logger (class) names
+ com.oreilly.LogTest.level = FINEST
+
+ /# Levels for specific logger (class) names
+ com.oreilly.LogTest.level = FINEST
+
+
+ /*Here, we’ve set the logging level for just our test logger, by name. The log properties
+follow the hierarchy, so we could set the logging level for all classes in the oreilly
+package with: */
+
+ com.oreilly.level = FINEST
+
+ /*
+Logging levels are set in the order in which they are read in the properties file, so set
+the general ones first. Note that the levels set on the handlers allow the file handler to
+filter only the messages being supplied by the loggers. Therefore, setting the file han‐
+dler to FINEST won’t revive messages squelched by a logger set to SEVERE (only the
+SEVERE messages will make it to the handler from that logger). */
+
+/*The Logger
+In our example, we used the seven convenience methods named for the various log‐
+ging levels. There are also three groups of general methods that can be used to pro‐
+vide more detailed information. The most general are:
+ */
+log(Level level, String msg)
+ log(Level level, String msg, Object param1)
+ log(Level level, String msg, Object params[])
+ log(Level level, String msg, Throwable thrown)
+ /*These methods accept as their first argument a static logging level identifier from the
+Level class, followed by a parameter, array, or exception type. The level identifier is
+one of Level.SEVERE, Level.WARNING, Level.INFO, and so on.
+In addition to these four methods, there are convenience methods called entering(),
+exiting(), and throwing() that developers can use to log detailed trace information.  */
