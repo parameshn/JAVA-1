@@ -38,3 +38,22 @@ a sleeping thread. In other words, you should cause your thread to stop or resum
 what it is doing by asking it nicely rather than by pulling the rug out from under it
 unexpectedly. The thread examples in this book use this technique in one way or
 another.*/
+
+/*The sleep() method
+We often need to tell a thread to sit idle, or “sleep,” for a fixed period of time. While a
+thread is asleep, or otherwise blocked from input of some kind, it doesn’t consume
+CPU time or compete with other threads for processing. For this, we can call the
+static method Thread.sleep(), which affects the currently executing thread. The call
+causes the thread to go idle for a specified number of milliseconds:*/
+try {
+ // The current thread
+ Thread.sleep( 1000 );
+ } catch ( InterruptedException e ) {
+ // someone woke us up prematurely
+ }
+/*
+The sleep() method may throw an InterruptedException if it is interrupted by
+another thread via the interrupt() method (more below). As you saw in the previ‐
+ous code, the thread can catch this exception and take the opportunity to perform
+some action—such as checking a variable to determine whether or not it should exit
+—or perhaps just perform some housekeeping and then go back to sleep */
