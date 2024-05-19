@@ -1,0 +1,74 @@
+/*  The Collection interface has three child interfaces. Set represents a collection in
+ which duplicate elements are not allowed. List is a collection whose elements have a
+ specific order. The Queue interface is a buffer for objects with a notion of a “head”
+ element that’s next in line for processing.*/
+
+/* Set
+Set has no methods besides the ones it inherits from Collection. It simply enforces
+its no-duplicates rule. If you try to add an element that already exists in a Set, the
+add() method simply returns false. SortedSet maintains elements in a prescribed
+order; like a sorted list that can contain no duplicates. You can retrieve subsets (which
+are also sorted) using the subSet(), headSet(), and tailSet() methods. These
+methods accept one or a pair of elements that mark the boundaries. The first(),
+ last(), and comparator() methods provide access to the first element, the last ele
+ment, and the object used to compare elements
+
+ Java 7 added NavigableSet, which extends SortedSet and adds methods for finding
+ the closest match greater or lesser than a target value within the sort order of the Set.
+ This interface can be implemented efficiently using techniques such as skip lists,
+ which make finding ordered elements fast.*/
+
+/* List
+The next child interface of Collection is List. The List is an ordered collection,
+similar to an array but with methods for manipulating the position of elements in the
+
+list:
+public boolean add( E element )
+Adds the specified element to the end of the list.
+
+public void add( int index , E element )
+Inserts the given object at the supplied position in the list. If the position is less
+than zero or greater than the list length, an IndexOutOfBoundsException will be
+thrown. The element that was previously at the supplied position, and all ele
+ments after it, are moved up one index position.
+
+public void remove( int index )
+Removes the element at the specified position. All subsequent elements move
+down one index position.
+
+public E get( int index )
+Returns the element at the given position.
+
+public Object set( int index , E element )
+Changes the element at the given position to the specified object. There must
+already be an object at the index or else an IndexOutOfBoundsException is
+thrown.
+
+The type E in these methods refers to the parameterized element type of the List
+class. Collection, Set, and List are all interface types. This is an example of the
+Generics feature we hinted at in the introduction to this chapter, and we’ll look at
+concrete implementations of these shortly.*/
+
+/*Queue
+ A Queue is a collection that acts like a buffer for elements. The queue maintains the
+ insertion order of items placed into it and has the notion of a “head” item. Queues
+ may be first in, first out (FIFO) or last in, first out (LIFO), depending on the imple
+mentation:
+
+ public boolean offer( E element ), public boolean add( E element )
+ The offer() method attempts to place the element into the queue, returning
+ true if successful. Different Queue types may have different limits or restrictions
+ on element types (including capacity). This method differs from the add()
+ method inherited from Collection in that it returns a Boolean value instead of
+ throwing an exception to indicate that the element cannot be accepted.
+
+
+ public E poll(), public E remove()
+ The poll() method removes the element at the head of the queue and returns it.
+ This method differs from the Collection method remove() in that if the queue
+ is empty, null is returned instead of throwing an exception.
+
+ 
+ public E peek()
+ Returns the head element without removing it from the queue. If the queue is
+ empty, null is returned.*/
