@@ -1,0 +1,60 @@
+// Collections and Generics
+/* Collections
+ Collections are data structures that are fundamental to all types of programming.
+ Whenever we need to refer to a group of objects, we have some kind of collection. At
+ the core language level, Java supports collections in the form of arrays. But arrays are
+ static, and because they have a fixed length, they are awkward for groups of things
+ that grow and shrink over the lifetime of an application. Arrays also do not represent
+ abstract relationships between objects well. In the early days, the Java platform had
+ only two basic classes to address these needs: the java.util.Vector class, which rep
+resents a dynamic list of objects, and the java.util.Hashtable class, which holds a
+ map of key/value pairs. Today, Java has a more comprehensive approach to collec
+tions called the Collections Framework. The older classes still exist, but they have
+ been retrofitted into the framework (with some eccentricities) and are generally no
+ longer used. */
+
+ /* The Collection Interface
+ The mother of all collections is an interface appropriately named Collection. It
+ serves as a container that holds other objects, its elements. It doesn’t specify exactly
+ how the objects are organized; it doesn’t say, for example, whether duplicate objects
+ are allowed or whether the objects are ordered in any way. These kinds of details are
+ left to child interfaces. Nevertheless, the Collection interface defines some basic
+ operations common to all collections: */
+
+
+ /*
+ public boolean add( element )
+ Adds the supplied object to this collection. If the operation succeeds, this method
+ returns true. If the object already exists in this collection and the collection does
+ not permit duplicates, false is returned. Furthermore, some collections are read
+only. Those collections throw an UnsupportedOperationException if this
+ method is called.
+
+
+ public boolean remove( element )
+ Removes the specified object from this collection. Like the add() method, this
+ method returns true if the object is removed from the collection. If the object
+ doesn’t exist in this collection, false is returned. Read-only collections throw an
+ UnsupportedOperationException if this method is called.
+
+
+ public boolean contains( element )
+ Returns true if the collection contains the specified object.
+
+
+ public int size()
+ Returns the number of elements in this collection.
+
+
+ public boolean isEmpty()
+ Returns true if this collection has no elements.
+
+
+ public Iterator iterator()
+ Examines all the elements in this collection. This method returns an Iterator,
+ which is an object you can use to step through the collection’s elements. We’ll talk
+ more about iterators in the next section.
+ 
+ Additionally, the methods addAll(), removeAll(), and containsAll() accept
+ another Collection and add, remove, or test for all of the elements of the supplied
+ collection. */
