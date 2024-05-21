@@ -1,0 +1,26 @@
+/*Type Limitations
+ Generics are about abstraction. Generics let you create classes and methods that work
+ in the same way on different types of objects. The term generic comes from the idea
+ that we’d like to be able to write general algorithms that can be broadly reused for
+ many types of objects rather than having to adapt our code to fit each circumstance.
+ This concept is not new; it is the impetus behind object-oriented programming itself.
+ Java generics do not so much add new capabilities to the language as they make reus
+able Java code easier to write and easier to read.
+ Generics take reuse to the next level by making the type of the objects with which we
+ work an explicit parameter of the generic code. For this reason, generics are also
+ referred to as parameterized types. In the case of a generic class, the developer speci
+fies a type as a parameter (an argument) whenever they use the generic type. The
+ class is parameterized by the supplied type to which the code adapts itself.
+ In other languages, generics are sometimes referred to as templates, which is more of
+ an implementation term. Templates are like intermediate classes, waiting for their
+ type parameters so that they can be used. Java takes a different path, which has both
+ benefits and drawbacks that we’ll describe in detail in this chapter.
+ There is much to say about Java generics. Some of the fine points may seem a bit
+ obscure at first, but don’t get discouraged. The vast majority of what you’ll do with
+ generics—using existing classes such as List and Set, for example—is easy and intu
+itive. Designing and creating your own generics requires a more careful understand
+ing and will come with a little patience and tinkering.
+ Indeed, we begin our discussion in that intuitive space with the most compelling case
+ for generics: the container classes and collections we just covered. Next, we take a
+ step back and look at the good, bad, and ugly of how Java generics work. We conclude
+ by looking at a couple of real-world generic classes in the Java API.*/
