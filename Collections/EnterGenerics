@@ -1,0 +1,56 @@
+/* Enter Generics
+ As we noted when introducing the type limitations in the previous section, generics
+ are an enhancement to the syntax of classes that allow us to specialize the class for a
+ given type or set of types. A generic class requires one or more type parameters wher
+ever we refer to the class type and uses them to customize itself.
+If you look at the source or Javadoc for the List class, for example, you’ll see it
+ defines something like this:*/
+
+
+  public class List< E > {
+ ...
+ public void add( E element ) { ... }
+ public E get( int i ) { ... }
+ }
+
+ /*
+  The identifier E between the angle brackets (<>) is a type parameter.1 It indicates that
+ the class List is generic and requires a Java type as an argument to make it complete.
+ The name E is arbitrary, but there are conventions that we’ll see as we go on. In this
+ case, the type variable E represents the type of elements we want to store in the list.
+ The List class refers to the type variable within its body and methods as if it were a
+ real type, to be substituted later. The type variable may be used to declare instance
+ variables, arguments to methods, and the return type of methods. In this case, E is
+ used as the type for the elements we’ll be adding via the add() method and the return
+ type of the get() method. Let’s see how to use it.
+ The same angle bracket syntax supplies the type parameter when we want to use the
+ List type:
+ */
+  List<String> listOfStrings;
+
+  /*
+  In this snippet, we declared a variable called listOfStrings using the generic type
+ List with a type parameter of String. String refers to the String class, but we could
+ have a specialized List with any Java class type. For example:
+  */
+
+   List<Date> dates;
+ List<java.math.BigDecimal> decimals;
+ List<Foo> foos;
+
+ /* Completing the type by supplying its type parameter is called instantiating the type. It
+ is also sometimes called invoking the type, by analogy with invoking a method and
+ supplying its arguments. Whereas with a regular Java type, we simply refer to the type
+ by name, a generic type must be instantiated with parameters wherever it is used.2
+ Specifically, this means that we must instantiate the type everywhere types can appear
+ as the declared type of a variable (as shown in this code snippet), as the type of a
+ method argument, as the return type of a method, or in an object allocation expres
+sion using the new keyword.
+Returning to our listOfStrings, what we have now is effectively a List in which the
+ type String has been substituted for the type variable E in the class body:*/
+
+ public class List< String > {
+ ...
+ public void add( String element ) { ... }
+ public String get( int i ) { ... }
+ }
