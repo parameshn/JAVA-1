@@ -54,3 +54,62 @@ Returning to our listOfStrings, what we have now is effectively a List in which 
  public void add( String element ) { ... }
  public String get( int i ) { ... }
  }
+
+ /* We have specialized the List class to work with elements of type String and only
+ elements of type String. This method signature is no longer capable of accepting an 
+arbitrary Object type.
+ List is just an interface. To use the variable, we’ll need to create an instance of some
+ actual implementation of List. As we did in our introduction, we’ll use ArrayList.
+ As before, ArrayList is a class that implements the List interface, but in this case,
+ both List and ArrayList are generic classes. As such, they require type parameters
+ to instantiate them where they are used. Of course, we’ll create our ArrayList to hold
+ String elements to match our List of Strings: */
+
+  List<String> listOfStrings = new ArrayList<String>
+ // Or shorthand in Java 7.0 and later
+ List<String> listOfStrings = new ArrayList<>();
+
+ /* As always, the new keyword takes a Java type and parentheses with possible argu
+ments for the class’s constructor. In this case, the type is ArrayList<String>—the
+ generic ArrayList type instantiated with the String type.
+ Declaring variables as shown in the first line of the preceding example is a bit cum
+bersome because it requires us to type the generic parameter type twice (once on the
+ left side in the variable type and once on the right in the initialing expression). And in
+ complicated cases, the generic types can get very lengthy and nested within one
+ another. Starting with Java 7, the compiler is smart enough to infer the type of the
+ initializing expression from the type of the variable to which you are assigning it.
+ This is called generic type inference and boils down to the fact that you can use short
+hand on the right side of your variable declarations by leaving out the contents of the
+ <> notation, as shown in the example’s second version. */
+
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ /*Let’s take another example from the Collections API. The Map interface provides a
+ dictionary-like mapping that associates key objects with value objects. Keys and val
+ues do not have to be of the same type. The generic Map interface requires two type
+ parameters: one for the key type and one for the value type. The Javadoc looks like
+ this:
+ */
+ public class Map< K, V > {
+ ...
+ public V put( K key, V value ) { ... } // returns any old value
+ public V get( K key ) { ... }
+ }
+
+ /* We can make a Map that stores Employee objects by Integer “employee ID” numbers
+ like this: */
+  Map< Integer, Employee > employees = new HashMap< Integer, Employee >();
+ Integer bobsId = 314; // hooray for autoboxing!
+ Employee bob = new Employee("Bob", ... );
+ employees.put( bobsId, bob );
+ Employee employee = employees.get( bobsId );
+
+ /* Here, we used HashMap, which is a generic class that implements the Map interface,
+ and instantiated both types with the type parameters Integer and Employee. The Map
+ now works only with keys of type Integer and holds values of type Employee.
+ The reason we used Integer here to hold our number is that the type parameters to a
+ generic class must be class types. We can’t parameterize a generic class with a primi
+tive type, such as int or boolean. Fortunately, autoboxing of primitives in Java (see
+ “Wrappers for Primitive Types” on page 141) makes it almost appear as if we can by
+ allowing us to use primitive types as though they were wrapper types. */
