@@ -1,0 +1,38 @@
+/* Talking About Types
+ Before we move on to more important things, we should say a few words about the
+ way we describe a particular parameterization of a generic class. Because the most
+ common and compelling case for generics is for container-like objects, it’s common
+ to think in terms of a generic type “holding” a parameter type. In our example, we
+ called our List<String> a “list of strings” because, sure enough, that’s what it was.
+ Similarly, we might have called our employee map a “Map of employee IDs to
+ Employee objects.” However, these descriptions focus a little more on what the classes
+ do than on the type itself. Take instead a single object container called Trap< E > that
+ could be instantiated on an object of type Mouse or of type Bear; that is, Trap<Mouse>
+ or Trap<Bear>. Our instinct is to call the new type a “mouse trap” or “bear trap.” Sim
+ilarly, we could have thought of our list of strings as a new type: “string list,” or our
+ employee map as a new “integer employee object map” type. You may use whatever
+ verbiage you prefer, but these latter descriptions focus more on the notion of the
+ generic as a type and may help you keep the terms straight when we discuss how
+ generic types are related in the type system. There we’ll see that the container termi
+nology turns out to be a little counterintuitive. */
+
+ “There Is No Spoon”
+ In the movie The Matrix,3 the hero Neo is offered a choice. Take the blue pill and
+ remain in the world of fantasy, or take the red pill and see things as they really are. In
+ dealing with generics in Java, we are faced with a similar ontological dilemma. We can
+ go only so far in any discussion of generics before we are forced to confront the real
+ity of how they are implemented. Our fantasy world is one created by the compiler to
+ make our lives writing code easier to accept. Our reality (though not quite the dysto
+pian nightmare in the movie) is a harsher place, filled with unseen dangers and ques
+tions. Why don’t casts and tests work properly with generics? Why can’t I implement
+ what appear to be two different generic interfaces in one class? Why is it that I can
+ declare an array of generic types, even though there is no way in Java to create such
+ an array?!? We’ll answer these questions and more in this chapter, and you won’t even
+ have to wait for the sequel. You’ll be bending spoons (well, types) in no time. Let’s get
+ started.
+ The design goals for Java generics were formidable: add a radical new syntax to the
+ language that safely introduces parameterized types with no impact on performance
+ and, oh, by the way, make it backward compatible with all existing Java code and
+ don’t change the compiled classes in any serious way. It’s actually quite amazing that
+ these conditions could be satisfied at all and no surprise that it took a while. But as
+ always, compromises were required, which led to some headaches.
