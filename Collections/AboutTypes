@@ -36,3 +36,17 @@ tions. Why don’t casts and tests work properly with generics? Why can’t I im
  don’t change the compiled classes in any serious way. It’s actually quite amazing that
  these conditions could be satisfied at all and no surprise that it took a while. But as
  always, compromises were required, which led to some headaches.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ Erasure
+ To accomplish this feat, Java employs a technique called erasure, which relates to the
+ idea that since most everything we do with generics applies statically at compile time,
+ generic information does not need to be carried over into the compiled classes. The
+ generic nature of the classes, enforced by the compiler, can be “erased” in the com
+piled classes, which allows us to maintain compatibility with nongeneric code. While
+ Java does retain information about the generic features of classes in the compiled
+ form, this information is used mainly by the compiler. The Java runtime does not
+ know anything about generics at all.
