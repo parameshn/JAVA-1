@@ -186,5 +186,58 @@ public class Stringss {
 
     boolean value = foo1.equals(foo2);
     System.out.println(value);
+    /* The compareTo() method compares the lexical value of the String to another
+    String, determining whether it sorts alphabetically earlier than, the same as, or later
+    than the target string. It returns an integer that is less than, equal to, or greater than
+    zero: */
+  String abc = "abc";
+ String def = "def";
+ String num = "123";
+ if ( abc.compareTo( def ) < 0 )    ;     // true
+if ( abc.compareTo( abc ) == 0 )     ;   // true
+if (abc.compareTo(num) > 0)
+    ;  // true
+
+
+/*The compareTo() method compares strings strictly by their characters’ positions in
+ the Unicode specification. This works for simple text but does not handle all language
+ variations well. The Collator class, discussed next, can be used for more sophistica
+ted comparisons. */
+
+/* Searching
+ The String class provides several simple methods for finding fixed substrings within
+ a string. The startsWith() and endsWith() methods compare an argument string
+ with the beginning and end of the String, respectively: */
+
+  String url = "http://foo.bar.com/";
+  if (url.startsWith("http:"));
+       // true
+
+ /* The indexOf() method searches for the first occurrence of a character or substring
+ and returns the starting character position, or -1 if the substring is not found: */
+
+
+ /* The indexOf() method searches for the first occurrence of a character or substring
+ and returns the starting character position, or -1 if the substring is not found: */
+String roc = "1243599465";
+int i = roc.indexOf('p');//false
+System.out.println(i);
+
+i = roc.indexOf('2');
+System.out.println(i);
+
+i = roc.lastIndexOf('2');
+System.out.println(i);
+/*Similarly, lastIndexOf() searches backward through the string for the last occur
+rence of a character or substring.
+
+
+ The contains() method handles the very common task of checking to see whether a
+ given substring is contained in the target string: */
+String log = "There is an emergency in sector 7!";
+if (log.contains("emergency"))
+    System.out.print(log);
+
+
     }
 }
