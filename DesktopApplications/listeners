@@ -1,0 +1,21 @@
+Swing and AWT events and associated listeners
+
+ S/A   Event class     Listener interface      Generating components
+  A    ActionEvent      ActionListener          JButton, JMenuItem, JTextField
+  S   ChangeEvent      ChangeListener          JSlider
+  A    KeyEvent         KeyListener             Descendants of Component
+  S  ListSelectionEvent ListSelectionListener    JList
+  A    MouseEvent       MouseListener           Descendants of Component
+  A    MouseMotionEvent MouseMotionListener     Descendants of Component
+  A    ItemEvent        ItemListener            JCheckBox, JRadioButton
+ 
+ 
+ AWT events (A) from java.awt.event, Swing events (S) from javax.swing.event
+
+
+  If you’re unsure what events a particular component supports, check its documenta
+tion for methods that look like addXYZListener(). That “XYZ” type will hand you a
+ direct clue about where else to look in the documentation. Once you have the docu
+mentation for the listener, try implementing every method and simply printing which
+event was reported. It’s a little trial and error, but you can learn a lot about how the
+ various Swing components react to keyboard and mouse events this way.
