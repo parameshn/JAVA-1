@@ -23,4 +23,21 @@ KB.) On our first call to read(), bis tries to fill our entire 32 KB buffer with
 it’s available. Thereafter, calls to read() retrieve data from the buffer, which is refilled
 as necessary
  */
+/*A BufferedOutputStream works in a similar way. Calls to write() store the data in a
+buffer; data is actually written only when the buffer fills up. You can also use the
+flush() method to wring out the contents of a BufferedOutputStream at any time.
+The flush() method is actually a method of the OutputStream class itself. It’s impor‐
+tant because it allows you to be sure that all data in any underlying streams and filter
+streams has been sent (before, for example, you wait for a response).
+Some input streams such as BufferedInputStream support the ability to mark a loca‐
+tion in the data and later reset the stream to that position. The mark() method sets
+the return point in the stream. It takes an integer value that specifies the number of
+bytes that can be read before the stream gives up and forgets about the mark. The
+reset() method returns the stream to the marked point; any data read after the call
+to mark() is read again.
+This functionality could be useful when you are reading the stream in a parser. You
+may occasionally fail to parse a structure and so must try something else. In this sit‐
+uation, you can have your parser generate an error and then reset the stream to the
+point before it began parsing the structure:
+ */
 }
