@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.nio.*;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.io.*;
 /*The NIO File API
@@ -134,6 +137,40 @@ public class NIOapi {
             File tmpFile = new File("\\tmp");
             Path path = tmpFile.toPath();
 
+            /*With the preceding methods, we can fetch input or output streams or buffered read‐
+            ers and writers to a given file. We can also create paths as files and directories, and
+            iterate through file hierarchies. We’ll discuss directory operations in the next section.
+            As a reminder, the resolve() and resolveSibling() methods of Path are useful for
+            constructing targets for the copy() and move() operations:
+            */
+
+            // Move the file /tmp/foo.txt to /tmp/bar.txt
+            Path foo = fs.getPath("/tmp/foo.txt");
+            Files.move(foo, foo.resolveSibling("bar.txt"));
+
+            /*For quickly reading and writing the contents of files without streaming, we can use
+            the various readAll… and write methods that move byte arrays or strings in and out
+            of files in a single operation. These are very convenient for files that easily fit into 
+            memory.
+            */
+            Path csvPath = Paths.get("input.csv");      // Change to your input file path
+        Path newCSVPath = Paths.get("output.csv");  // Change to your output file path
+            // Read and write collection of String (e.g., lines of text)
+            Charset asciiCharset = Charset.forName("US-ASCII");
+            // Read all lines from the input file using the specified charset
+            List<String> csvData = Files.readAllLines(csvPath, asciiCharset);
+            // Write all lines to the output file using the same charset
+            Files.write(newCSVPath, csvData, asciiCharset);
+
+
+
+            Path dataPath = Paths.get("input.dat"); // Change to your input file path
+            Path newDataPath = Paths.get("output.dat"); // Change to your output file path
+
+            // Read and write bytes
+            byte[] data = Files.readAllBytes(dataPath);
+            Files.write(newDataPath, data);
+
         } catch (IOException ae) {
 
         }
@@ -143,5 +180,7 @@ public class NIOapi {
     public static void main(String [] mai)
     {
         NIOapi jk = new NIOapi();
+
+        
     }
 }
