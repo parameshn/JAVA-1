@@ -1,5 +1,12 @@
 package FileOperations;
 
+import java.nio.ByteBuffer;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
 /*Buffers
 Most of the utilities of the java.io and java.net packages operate on byte arrays.
 The corresponding tools of the NIO package are built around ByteBuffers (with
@@ -50,5 +57,75 @@ The position for reading and writing the Buffer is always between the mark, whic
 serves as a lower bound, and the limit, which serves as an upper bound. The capacity
 represents the physical extent of the buffer space.*/
 public class BufferOperation {
-    
+    /*You can set the position and limit markers explicitly with the position() and
+    limit() methods. Several convenience methods are provided for common usage pat‐
+    terns. The reset() method sets the position back to the mark. If no mark has been
+    set, an InvalidMarkException is thrown. The clear() method resets the position to
+    0 and makes the limit the capacity, readying the buffer for new data (the mark is dis‐
+    carded). Note that the clear() method does not actually do anything to the data in
+    the buffer; it simply changes the position markers.
+    The flip() method is used for the common pattern of writing data into the buffer
+    and then reading it back out. flip makes the current position the limit and then
+    resets the current position to 0 (any mark is thrown away), which saves having to
+    keep track of how much data was read. Another method, rewind(), simply resets the
+    position to 0, leaving the limit alone. You might use it to write the same size data
+    again. Here is a snippet of code that uses these methods to read data from a channel
+    and write it to two channels
+    */
+
+    /*
+     * ByteBuffer buff = ...
+     * while ( inChannel.read( buff ) > 0 ) { // position = ?
+     * buff.flip(); // limit = position; position = 0;
+     * outChannel.write( buff );
+     * buff.rewind(); // position = 0
+     * outChannel2.write( buff );
+     * buff.clear(); // position = 0; limit = capacity
+     * }
+     */
+
+    public static void main(String [] args)
+    {
+        String inputFile = "input.txt";
+        String outputFile1 = "output1.txt";
+        String outputFile2 = "output2.txt";
+
+
+        //buffer size
+        int bufferSize = 32 * 1024; //32kb
+
+        //initialize
+       try (
+               FileInputStream fis = new FileInputStream(inputFile);
+               FileOutputStream fos1 = new FileOutputStream(outputFile1);
+               FileOutputStream fos2 = new FileOutputStream(outputFile2);
+               FileChannel inChannel = fis.getChannel();
+               FileChannel outChannel = fos1.getChannel();
+               FileChannel outChannel2 = fos2.getChannel();
+       ) {
+           // Allocate a ByteBuffer with the defined size
+           ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
+
+           // Read from the input channel into the buffer
+           while (inChannel.read(buffer) > 0) {
+               // Prepare the buffer for reading by flipping it
+               buffer.flip();
+               // Write data from the buffer to the first output channel
+               outChannel.write(buffer);
+
+               // Rewind the buffer to read the same data again
+               buffer.rewind();
+
+               // Write data from the buffer to the second output channel
+               outChannel2.write(buffer);
+
+               // Clear the buffer for the next read operation
+               buffer.clear();
+           }
+       } 
+            catch (IOException e) {
+            e.printStackTrace();
+        }
+     }
 }
+
