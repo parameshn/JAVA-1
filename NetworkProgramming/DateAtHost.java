@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.Socket;
 import java.io.*;
+import java.time.*;
+import java.util.Date;
 
-public class DateAtHost {
+public class DateAtHost extends java.util.Date{
     /*The DateAtHost Client
     In the past, many networked computers ran a simple time service that dispensed their
     clock’s local time on a well-known port. This was a precursor of NTP, the more gen‐
@@ -32,6 +34,8 @@ public class DateAtHost {
         DataInputStream din = new DataInputStream(server.getInputStream());
         int time = din.readInt();
         server.close();
+        // long correctedTime = ((time & 0xFFFFFFFFL) - offset) * 1000;//(((1L << 32) + time) - offset) * 1000;
+        // setTime(correctedTime);
         setTime((((1L << 32) + time) - offset) * 1000);
 
     }
