@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class SubtypesAndWildcards {
     public static double sum(Collection<? extends Number> nums)
@@ -37,12 +38,29 @@ public class SubtypesAndWildcards {
     
     public static <T extends Comparable <T>> T max(Collection <T> coll)
     {
-        T candidate = coll.iterator().next();
-        for (T elt : coll) {
+        T candidate = coll.iterator().next(); // First iterator created // Gets first element
+        for (T elt : coll) {                   // Second iterator created (for-each creates another iterator) 
+                                                // Processes ALL elements including first one again
+            if (candidate.compareTo(elt) < 0) 
+                candidate = elt;
+        }
+        return candidate;
+    }
+
+    //public static<T extends Comparable <T>> T max2(Collection <T> coll)
+    // <T extends Comparable<? super T>> T max(Collection <T> coll)
+    public static <T extends Comparable<? super T>> T max2(Collection<? extends T> coll)
+    {
+        Iterator<? extends T> it = coll.iterator();   // Single iterator created // Gets first element 
+        T candidate = it.next(); 
+        while(it.hasNext())     // Continues with same iterator // Only processes remaining elements
+        {
+            T elt = it.next();
             if (candidate.compareTo(elt) < 0)
                 candidate = elt;
         }
         return candidate;
+
     }
 
     public static void main(String args[]) {
