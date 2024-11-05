@@ -115,31 +115,27 @@ class TestTask {
         assert allTasks.toString().equals(
                 "[code logic, phone Mike, phone Ruth, code db, code gui, phone Paul]");
 
-        
-        //Removingg elements
+        // Removingg elements
         boolean wasPresent = mondayTasks.remove(mikePhone);
         assert wasPresent;
         assert mondayTasks.toString().equals("[code logic,phone Ruth]");
 
-        //clearing out fully
+        // clearing out fully
         mondayTasks.clear();
 
         Collection<Task> allTask2 = new ArrayList<>();
         allTask2.addAll(mondayTasks);
-      //  allTask2.add(tuesdayTasks); error
+        // allTask2.add(tuesdayTasks); error
         allTask2.addAll(codingTasks);
 
-        Collection<Collection<String>> collectionOfCollections = new ArrayList<>(); // does not preserve order 
+        Collection<Collection<String>> collectionOfCollections = new ArrayList<>(); // does not preserve order
         Collection<String> innerCollection = new ArrayList<>();
         innerCollection.add("Element 1");
         collectionOfCollections.add(innerCollection);
         // collectionOfCollections.add(mikePhone); error
-       
-        //collection defined to hold list of collections can only collections not objects and vice versa
 
-
-
-
+        // collection defined to hold list of collections can only hold collections not
+        // objects and vice versa
 
     }
 }
@@ -170,65 +166,65 @@ class TestTask {
  * `toString()` in custom classes like `PhoneTask` and `CodingTask`.
  */
 
- /*
-  * No, you would need to use addAll here, rather than add, because add only adds
-  * a single element to the collection, while addAll allows you to add all
-  * elements from another collection. Here's how they work differently in this
-  * context:
-  * 
-  * Using add: If you use allTasks.add(tuesdayTasks);, it will add tuesdayTasks
-  * as a single item (a nested Collection inside allTasks), rather than adding
-  * each individual task from tuesdayTasks. This is likely not what you want, as
-  * allTasks would then contain the elements of mondayTasks, followed by a single
-  * item: the entire tuesdayTasks collection.
-  * 
-  * Using addAll: By using allTasks.addAll(tuesdayTasks);, you are adding each
-  * element in tuesdayTasks as an individual item into allTasks. This will give
-  * you a flat list of all tasks in mondayTasks and tuesdayTasks, which is
-  * probably what you're looking for.
-  * 
-  * In summary, addAll is the correct method here to combine two collections into
-  * one, maintaining each element individually within allTasks.
-  */
+/*
+ * No, you would need to use addAll here, rather than add, because add only adds
+ * a single element to the collection, while addAll allows you to add all
+ * elements from another collection. Here's how they work differently in this
+ * context:
+ * 
+ * Using add: If you use allTasks.add(tuesdayTasks);, it will add tuesdayTasks
+ * as a single item (a nested Collection inside allTasks), rather than adding
+ * each individual task from tuesdayTasks. This is likely not what you want, as
+ * allTasks would then contain the elements of mondayTasks, followed by a single
+ * item: the entire tuesdayTasks collection.
+ * 
+ * Using addAll: By using allTasks.addAll(tuesdayTasks);, you are adding each
+ * element in tuesdayTasks as an individual item into allTasks. This will give
+ * you a flat list of all tasks in mondayTasks and tuesdayTasks, which is
+ * probably what you're looking for.
+ * 
+ * In summary, addAll is the correct method here to combine two collections into
+ * one, maintaining each element individually within allTasks.
+ */
 
-  // how to access if i use elements of tuesdayTasks if i use add
-  /*
-   * If you use `add` to add `tuesdayTasks` to `allTasks`, you’ll end up with a
-   * nested collection structure, where `tuesdayTasks` is a single element within
-   * `allTasks`, rather than each task in `tuesdayTasks` being added individually.
-   * 
-   * Here’s how it would work:
-   * 
-   * ```java
-   * Collection<Task> allTasks = new ArrayList<Task>(mondayTasks);
-   * allTasks.add(tuesdayTasks); // This adds the entire tuesdayTasks collection
-   * as one element
-   * ```
-   * 
-   * If you try to access `tuesdayTasks` this way, it won’t work as expected
-   * because `allTasks` now contains a single element that is the `tuesdayTasks`
-   * collection itself, not the individual tasks inside `tuesdayTasks`.
-   * 
-   * To access elements of `tuesdayTasks` in this scenario, you would need to cast
-   * the element back to `Collection<Task>` and then iterate over it. Here’s an
-   * example:
-   * 
-   * ```java
-   * for (Object task : allTasks) {
-   * if (task instanceof Collection) {
-   * Collection<Task> nestedTasks = (Collection<Task>) task;
-   * for (Task t : nestedTasks) {
-   * System.out.println(t); // Access each task within tuesdayTasks
-   * }
-   * } else {
-   * System.out.println(task); // Access individual tasks (if any) added directly
-   * to allTasks
-   * }
-   * }
-   * ```
-   * 
-   * This approach is generally discouraged because it’s not very intuitive and
-   * creates unnecessary complexity. It’s better to use `addAll`, which will give
-   * you a flat structure with all tasks as individual elements in `allTasks`,
-   * making them directly accessible without any casting or nested iteration.
-   */
+// how to access if i use elements of tuesdayTasks if i use add
+/*
+ * If you use `add` to add `tuesdayTasks` to `allTasks`, you’ll end up with a
+ * nested collection structure, where `tuesdayTasks` is a single element within
+ * `allTasks`, rather than each task in `tuesdayTasks` being added individually.
+ * 
+ * Here’s how it would work:
+ * 
+ * ```java
+ * Collection<Task> allTasks = new ArrayList<Task>(mondayTasks);
+ * allTasks.add(tuesdayTasks); // This adds the entire tuesdayTasks collection
+ * as one element
+ * ```
+ * 
+ * If you try to access `tuesdayTasks` this way, it won’t work as expected
+ * because `allTasks` now contains a single element that is the `tuesdayTasks`
+ * collection itself, not the individual tasks inside `tuesdayTasks`.
+ * 
+ * To access elements of `tuesdayTasks` in this scenario, you would need to cast
+ * the element back to `Collection<Task>` and then iterate over it. Here’s an
+ * example:
+ * 
+ * ```java
+ * for (Object task : allTasks) {
+ * if (task instanceof Collection) {
+ * Collection<Task> nestedTasks = (Collection<Task>) task;
+ * for (Task t : nestedTasks) {
+ * System.out.println(t); // Access each task within tuesdayTasks
+ * }
+ * } else {
+ * System.out.println(task); // Access individual tasks (if any) added directly
+ * to allTasks
+ * }
+ * }
+ * ```
+ * 
+ * This approach is generally discouraged because it’s not very intuitive and
+ * creates unnecessary complexity. It’s better to use `addAll`, which will give
+ * you a flat structure with all tasks as individual elements in `allTasks`,
+ * making them directly accessible without any casting or nested iteration.
+ */
