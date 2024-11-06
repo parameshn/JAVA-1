@@ -137,6 +137,20 @@ class TestTask {
         // collection defined to hold list of collections can only hold collections not
         // objects and vice versa
 
+        Collection<Task> tuesdayNonphoneTasks = new ArrayList<Task>(tuesdayTasks);
+        tuesdayNonphoneTasks.removeAll(phoneTasks);
+        assert tuesdayNonphoneTasks.toString().equals("[code db, code gui]");
+
+        Collection<Task> phoneTuesdayTasks = new ArrayList<Task>(tuesdayTasks);
+        phoneTuesdayTasks.retainAll(phoneTasks);
+        assert phoneTuesdayTasks.toString().equals("[phone Paul]");
+
+        
+
+
+
+
+
     }
 }
 // what if there's no tostring method?
