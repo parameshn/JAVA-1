@@ -1,5 +1,6 @@
 package Generics;
 
+import java.io.CharArrayReader;
 import java.util.*;
 
 
@@ -10,6 +11,30 @@ public class sets {
         s1.add('a');
         s1.add('b');
         s1.add('j');
+
+        Set<Character> s2 = new LinkedHashSet<Character>(8);
+
+        Collections.addAll(s2, 'a', 'b', 'j');
+        // iterators of a LinkedHashSet return their elements in proper order
+        assert s2.toString().equals("[a,b,j]");
+        Character ele = s2.iterator().next();
+
+        System.out.println(ele);
+        System.out.println("inside loop");
+        Iterator<Character> itr = s2.iterator();
+        for (; itr.hasNext();) {
+            Character element = itr.next();
+            System.out.println(element);
+        }
+        
+        for (Character element : s2) {
+            System.out.println(element);
+        }
+
+        List<Character> list = new ArrayList<>(s2);
+        Character element = list.get(0);
+        System.out.println("First element as a list: " + element);
+
 
 
 
