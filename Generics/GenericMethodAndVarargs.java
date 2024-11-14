@@ -1,7 +1,7 @@
 package Generics;
 
-import java.util.Arrays;
-import java.util.Iterator;
+// import java.util.Arrays;
+// import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 public class GenericMethodAndVarargs {
@@ -23,13 +23,15 @@ public class GenericMethodAndVarargs {
 
     }
     
-    public static <T> List<T> toList2(T... arr) {
+    @SafeVarargs
+    public static <T> List<T> toList2(T... arr2) {
         List<T> list = new ArrayList<T>();
-        for (T elt : arr)
+        for (T elt : arr2)
             list.add(elt);
         return list;
     }
-
+    
+    @SafeVarargs
     public static <T> void addAll(List<T> list,T... arr)
     {
         for (T elt : arr)
@@ -56,6 +58,7 @@ public class GenericMethodAndVarargs {
         assert ints.toString().equals("[1,2,3,4]");
 
 
+        System.out.println(ints+" "+ints+" "+ints2+" "+ints3+" "+words+" "+words2);
 
     }
 }
