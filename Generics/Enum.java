@@ -32,3 +32,10 @@ enum Days {
   * EnumSet.noneOf(...): Starts as an empty set.
   * EnumSet.complementOf(...): Includes all values except the ones specified.
   */
+
+
+  /*
+   * Yes, every enum in Java has a .class object, just like any other Java class.
+   * When you define an enum, Java treats it as a special kind of class, so it
+   * automatically gets a .class file associated with it.
+   */
